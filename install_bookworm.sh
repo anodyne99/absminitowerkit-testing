@@ -4,6 +4,7 @@
 log_action_msg "Welcome to GeeekPi ABS Minitower kit installation Program"
 codename=`lsb_release -a |grep Codename| awk '{print $NF}'`
 arch=`uname -m`
+username=`whoami`
 log_action_msg "Detect system information..." 
 if [[ $codename == 'bookworm' && $arch == 'aarch64' ]]; then
 	log_action_msg "OS: Raspberry Pi OS 64bit bookworm"
@@ -32,7 +33,7 @@ if [ $? -eq 0 ]; then
 fi
 
 # grant privilledges to user pi.
-sudo usermod -a -G gpio,i2c pi && log_action_msg "grant privilledges to user pi" || log_warning_msg "Grant privilledges failed!" 
+sudo usermod -a -G $username gpio,i2c && log_action_msg "grant privilledges to user pi" || log_warning_msg "Grant privilledges failed!" 
 
 # download driver from internet 
 cd /tmp
